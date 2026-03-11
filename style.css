@@ -1,0 +1,94 @@
+.body {
+    background-color: #ffffff;
+}
+
+.dark-theme {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.main-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* опишем базовый стиль кнопки калькулятора */
+.my-btn { 
+  margin-right: 5px;           /* задаем отступ от кнопки справа */
+  margin-top: 5px;             /* задаем отступ от кнопки сверху*/
+  width: 50px;                 /* задаем ширину кнопки */
+  height: 50px;                /* задаем высоту кнопки */
+  border-radius: 5px;          /* округляем кнопку */
+  border: none;                /* отключаем обводку */
+  background: #2b2f33;         /* задаем серый цвет кнопки */
+  color: white;                /* задаем белый цвет текста внутри кнопки */
+  font-size: 1.5rem;           /* увеличим размер шрифта */
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; /* сменим шрифт */
+  font-weight: 900;
+  cursor: pointer;             /* при наведении на кнопку курсор будет изменен
+                                  со стрелки на 'указательный палец' */
+  user-select: none;           /* отключаем возможность выделить текст внутри кнопки */
+} 
+
+.my-btn.sys {
+  width: auto;
+  height: auto;
+}
+
+/* hover - это состояние элемента, когда на него наведен курсор */
+.my-btn:hover {
+  background: greenyellow; /* при наведение курсора на кнопку, она будет окрашена */
+}
+
+/* active - это состояние активации элемента. В случае кнопки - нажатие на нее */
+.my-btn:active {
+  filter: brightness(130%); /* увеличим интенсивность цвета для эффекта вспышки */
+}
+
+/* селектор для кнопок первостепенных операций */
+.my-btn.primary { 
+  background: #233cc8; /* цвет кнопки оранжевый */
+}
+
+/* селектор для кнопок второстепенных операций */
+.my-btn.secondary { 
+  background: #1ac16b; /* цвет кнопки сервый */
+}
+
+/* селектор для кнопки расчета выражения (=) */
+.my-btn.long { 
+  width: 110px;          /* сделаем кнопку шире других */
+  border-radius: 5px;   /* подкорректируем округлость */
+}
+
+/* селектор для поля вывода результата */
+.result { 
+  width: 330px;
+  height: 100px;
+  margin-bottom: 15px;         /* отступ снизу */
+  padding-right: 10px;         /* выступ справа */
+  border-radius: 10px;
+  background: rgb(73, 73, 73); /* цвет можно задавать и таким образом */
+  text-align: right;           /* примагнитим текст к правой стороне */
+  color: #ffffff;              /* цвет текста */
+  font-size: 1.5rem;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 100;
+}
+
+.background-on {
+  /*background-image: url('image.png');*/
+  background-color: #d2f8e5;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  padding: 10px;
+  padding-right: 0px;
+}
+
+.second-result-color {
+  color: #000000;
+  background-color: #ffffff;
+}
