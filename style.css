@@ -16,13 +16,13 @@
 
 /* опишем базовый стиль кнопки калькулятора */
 .my-btn { 
-  margin-right: 5px;           /* задаем отступ от кнопки справа */
+  margin-left: 5px;           /* задаем отступ от кнопки справа */
   margin-top: 5px;             /* задаем отступ от кнопки сверху*/
   width: 50px;                 /* задаем ширину кнопки */
   height: 50px;                /* задаем высоту кнопки */
   border-radius: 5px;          /* округляем кнопку */
   border: none;                /* отключаем обводку */
-  background: #2b2f33;         /* задаем серый цвет кнопки */
+  background: #494949;         /* задаем серый цвет кнопки */
   color: white;                /* задаем белый цвет текста внутри кнопки */
   font-size: 1.5rem;           /* увеличим размер шрифта */
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; /* сменим шрифт */
@@ -49,12 +49,12 @@
 
 /* селектор для кнопок первостепенных операций */
 .my-btn.primary { 
-  background: #233cc8; /* цвет кнопки оранжевый */
+  background: #839cc8; /* цвет кнопки оранжевый */
 }
 
 /* селектор для кнопок второстепенных операций */
 .my-btn.secondary { 
-  background: #1ac16b; /* цвет кнопки сервый */
+  background: #56c540; /* цвет кнопки сервый */
 }
 
 /* селектор для кнопки расчета выражения (=) */
@@ -65,7 +65,7 @@
 
 /* селектор для поля вывода результата */
 .result { 
-  width: 330px;
+  width: 340px;
   height: 100px;
   margin-bottom: 15px;         /* отступ снизу */
   padding-right: 10px;         /* выступ справа */
@@ -80,15 +80,95 @@
 
 .background-on {
   /*background-image: url('image.png');*/
-  background-color: #d2f8e5;
+  background-color: white;
   width: 100%;
   height: 100%;
   border-radius: 5px;
   padding: 10px;
   padding-right: 0px;
+  border: 1px solid;
 }
 
 .second-result-color {
   color: #000000;
   background-color: #ffffff;
+}
+
+.menu-tab {
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  letter-spacing: -.02em;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 20px;
+  color: #2b2f33;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  background: inherit;
+  border: 0;
+  font-family: inherit;
+}
+
+.nav-categories {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 24px;
+  list-style-type: none;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+ul.nav-categories li a {
+  text-decoration: none;
+}
+
+ul.nav-categories li a:hover {
+  color: #1ac16b;
+  text-decoration-line: underline;
+}
+
+.content-wrapper {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+h1 {
+  font-size: 60px;
+  line-height: 66px;
+  font-family: Geologica,Inter,Arial,Helvetica Neue,Helvetica,FreeSans,sans-serif;
+  font-weight: 500;
+  letter-spacing: -.03em;
+  margin: 0;
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 53px;
+  line-height: 59px;
+  font-family: Geologica,Inter,Arial,Helvetica Neue,Helvetica,FreeSans,sans-serif;
+  font-weight: 500;
+  letter-spacing: -.03em;
+  margin: 0 0 36px;
+  padding-top: 24px;
+  font-weight: bold;
+}
+
+.logo {
+  font-size: larger;
+  font-weight: bold;
+}
+
+.sc-header {
+  margin: 1%;
+}
+
+.history {
+  color: #aaaaaa;
+  margin-top: 35px;
 }

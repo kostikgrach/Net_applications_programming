@@ -7,15 +7,33 @@
 </head>
 
 <body>
-    <div style="right: 5; top: 5;">
-        <button id="theme-button" class="my-btn sys">Сменить тему</button>
-        <a class="my-btn sys" href="https://github.com/kostikgrach/Net_applications_programming">github</a>
+  <header class="sc-header">
+    <div>
+      <ul class="nav-categories">
+        <li>
+          <a class="menu-tab logo" href="main.html">
+            Бекапы
+          </a>
+        </li>
+        <li>
+          <a class="menu-tab" href="calculator.html">
+            Калькулятор
+          </a>
+        </li>
+        <li>
+          <a class="menu-tab" href="author.html">
+            Автор
+          </a>
+        </li>
+      </ul>
     </div>
+  </header>
   <div class="main-container"> <!-- div - это базовый html-контейнер, который может содержать в себе другие html-элементы. -->
     <div class="background-on">
     <!-- блок с экраном калькулятора, где будет выводиться результат вычислений. -->
-    <div id="result" class="result">
-      0
+    <div id="result-window" class="result">
+      <div id="result">0</div>
+      <div id="history" class="history"></div>
     </div>
 
     <!-- блок с кнопками калькулятора. -->
@@ -33,7 +51,7 @@
        <button id="btn_digit_7" class="my-btn">7</button>
         <button id="btn_digit_8" class="my-btn">8</button>
         <button id="btn_digit_9" class="my-btn">9</button>
-        <button id="btn_op_mult" class="my-btn primary">x</button>
+        <button id="btn_op_mult" class="my-btn primary">×</button>
         <button id="btn_op_sqrt" class="my-btn primary">√</button>
         <button id="btn_op_square" class="my-btn primary">x²</button>
       </div>
@@ -65,25 +83,7 @@
       </div>
     </div>
     </div>
-    <details>
-      <summary>Автор</summary>
-      <p>ЛР выполнена Грачевым К. А.</p>
-      <p>Группа: ИУ5-42Б</p>
-    </details>
-    <select id="choice">
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-    </select>
   </div>
-  <p>Цель данной лабораторной работы - <strong>знакомство</strong> с инструментами построения пользовательских интерфейсов web-сайтов: <strong>HTML, CSS</strong>. В ходе выполнения работы, вам предстоит ознакомиться с кодом реализации простого калькулятора, и затем выполнить задания по варианту.</p>
-  <button id="result-theme-button" class="my-btn sys">Сменить цвет окна вывода результата</button>
-  <script>
-    const button = document.getElementById("theme-button");
-    button.addEventListener('click', () => {
-        document.body.classList.toggle("dark-theme");
-    });
-  </script>
   <script type="text/javascript" src="calc.js"></script>
 </body>
 </html>

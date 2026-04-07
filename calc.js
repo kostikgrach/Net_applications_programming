@@ -2,12 +2,14 @@ window.onload = function(){
     // Переменные для хранения чисел и операций
     let a = '';           // Первое число
     let b = '';           // Второе число
+    let histoy = '';
     let expressionResult = '';  // Результат вычисления
     let total = 0;
     let selectedOperation = null;  // Выбранная операция
 
-        // Получаем доступ к экрану калькулятора в поле вывода
+    // Получаем доступ к экрану калькулятора в поле вывода
     const outputElement = document.getElementById("result");
+    const historyOutputElement = document.getElementById("history");
 
     // Получаем все кнопки с цифрами (их id начинаются с "btn_digit_")
     const digitButtons = document.querySelectorAll('[id ^= "btn_digit_"]');
@@ -16,17 +18,17 @@ window.onload = function(){
         // Если операция не выбрана, работаем с первым числом (a) - после выбора операции начинается ввод второго числа
         if (!selectedOperation) {
             // Проверяем, не пытаемся ли мы добавить вторую точку
-            if ((digit != '.') || (digit == '.' && !a.includes(digit))) { 
+            if (((digit != '.') || (digit == '.' && !a.includes(digit))) && (digit != 0 || a != '')) { 
                 // здесь у нас происходит складывание сохраненного уже числа и нажатой цифры. Оба поля string, поэтому
                 // каждый раз цифра записывается в конец строки. Например: a = '14', digit = '5', 
                 // a += digit - это короткая запись a = a + digit - поэтомоу после этой операции a = '145'
                 a += digit;
+                outputElement.innerHTML = a;
             }
-            outputElement.innerHTML = a;
         } 
         // Если операция выбрана, работаем со вторым числом (b)
         else {
-            if ((digit != '.') || (digit == '.' && !b.includes(digit))) { 
+            if (((digit != '.') || (digit == '.' && !b.includes(digit))) && (digit != 0 || a != '')) { 
                 b += digit;
                 outputElement.innerHTML = b;        
             }
@@ -41,26 +43,36 @@ window.onload = function(){
         }
     });
 
+    function onOpButtonClicked(operation) {
+        if (a === '') return;        
+        if (!selectedOperation) {
+            histoy += a + operation;
+        } else if (a && b) {
+            histoy += b + operation;
+            calculate();
+        } else {
+            histoy[-1] = operation;
+        }
+        historyOutputElement.innerHTML = histoy;
+
+        selectedOperation = operation;
+    }
+
     // Настраиваем обработчики для кнопок операций - сохраняем выбранную операцию в ранее созданную переменную selectedOperation
     document.getElementById("btn_op_mult").onclick = function() { 
-        if (a === '') return;
-        selectedOperation = 'x';
+        onOpButtonClicked('×');
     }
     document.getElementById("btn_op_plus").onclick = function() { 
-        if (a === '') return;
-        selectedOperation = '+';
+        onOpButtonClicked('+');
     }
     document.getElementById("btn_op_minus").onclick = function() { 
-        if (a === '') return;
-        selectedOperation = '-';
+        onOpButtonClicked('-');
     }
     document.getElementById("btn_op_div").onclick = function() { 
-        if (a === '') return;
-        selectedOperation = '/';
+        onOpButtonClicked('/');
     }
     document.getElementById("btn_op_percent").onclick = function() { 
-        if (a === '') return;
-        selectedOperation = '%';
+        onOpButtonClicked('%');
     }
 
     document.getElementById("btn_op_sign").onclick = function() {
@@ -68,6 +80,8 @@ window.onload = function(){
             a = (a * -1).toString();
 
             outputElement.innerHTML = a;
+
+            
         } else {
             b = (b * -1).toString();
 
@@ -77,13 +91,12 @@ window.onload = function(){
     document.getElementById("btn_delete").onclick = function() {
         if (!selectedOperation) {
             a = a.slice(0, -1);
-            console.log(a);
             if (a == '') {
                 outputElement.innerHTML = 0;
             } else {
                 outputElement.innerHTML = a;
             }
-        } else {
+        }  else {
             b = b.slice(0, -1);
             if (b == '') {
                 outputElement.innerHTML = 0;
@@ -114,11 +127,13 @@ window.onload = function(){
         if (!selectedOperation) {
             if (a != '') {
                 a += '000';
+                histoy += '000'
                 outputElement.innerHTML = a;
             }
         } else {
             if (b != '') {
                 b += '000';
+                histoy += '000'
                 outputElement.innerHTML = b;
             }
         }
@@ -145,7 +160,7 @@ window.onload = function(){
     }
     document.getElementById("btn_grand_total").onclick = function() {
         if (!selectedOperation) {
-            a =  total.toString();
+            a = total.toString();
         } else {
             b = total.toString();
         }
@@ -165,10 +180,27 @@ window.onload = function(){
         // Проверяем, что у нас есть оба числа и операция
         if (a === '' || b === '' || !selectedOperation)
             return
-            
+
+        histoy += b + '='
+        historyOutputElement.innerHTML = histoy;
+
+        calculate();
+
+        histoy = '';
+        total += expressionResult;
+
+        // Показываем результат на экране
+        outputElement.innerHTML = a;
+    }
+
+    /*document.getElementById("result-theme-button").onclick = function() {
+        document.getElementById("result").classList.toggle("second-result-color")
+    }*/
+
+    function calculate() {
         // Выполняем выбранную операцию - чтобы не плодить if, воспользуемся удобной и более наглядной функцией сравнения switch, которая на основе значения переданной переменной выполняет нужный кейс. В case указывается ожидаемое точное значение переменной (это может быть любое значение), а затем после : пишется код, который нужно выполнить в данном случае. Case проверяются последовательно, выход из switch происходит при попадании на break или если значение не совпало ни с чем.
         switch(selectedOperation) { 
-            case 'x':
+            case '×':
                 expressionResult = (+a) * (+b);
                 // обязательно пишется в конце действий case, чтобы выйти из switch, иначе продолжится сравнение case дальше
                 break;
@@ -188,21 +220,12 @@ window.onload = function(){
             default:
                 break;
         }
-        
+
         // Сохраняем результат и очищаем второе число, чтобы при новом вводе записывать значение нового числа в b
         a = expressionResult.toString();
         b = '';
         selectedOperation = null;
-
-        total += expressionResult;
-
-        // Показываем результат на экране
-        outputElement.innerHTML = a;
-    }
-
-    document.getElementById("result-theme-button").onclick = function() {
-        document.getElementById("result").classList.toggle("second-result-color")
-    }
+    }   
 };
 
 
