@@ -1,0 +1,31 @@
+{
+  "name": "net_applications_programming",
+  "version": "1.0.0",
+  "description": "Грачев К. А. Репозитроий ПСП 2026",
+  "main": "index.js",
+  "dependencies": {
+    "bootstrap": "^5.3.8",
+    "express": "^5.2.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kostikgrach/Net_applications_programming.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kostikgrach/Net_applications_programming/issues"
+  },
+  "homepage": "https://github.com/kostikgrach/Net_applications_programming#readme",
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  },
+  "scripts": {  
+    "start": "node src/index.js",  
+    "dev": "nodemon src/index.js"  
+  }
+}
