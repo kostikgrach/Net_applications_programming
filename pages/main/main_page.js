@@ -46,7 +46,7 @@ export class MainPage {
     }
 
     clickCard(e) {
-        const cardId = e.target.dataset.id
+        const cardId = e.target.dataset.id;
         
         const productPage = new ProductPage(this.parent, cardId)
         productPage.render()
