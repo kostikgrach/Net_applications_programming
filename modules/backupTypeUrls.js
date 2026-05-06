@@ -3,23 +3,27 @@ class BackupTypeUrls {
         this.baseUrl = 'http://localhost:3000';
     }
 
-    getStocks() {
+    getBackupTypes() {
         return `${this.baseUrl}/backupTypes`;
     }
 
-    getStockById(id) {
+    getBackupTypeById(id) {
         return `${this.baseUrl}/backupTypes/${id}`;
     }
 
-    createStock() {
+    getBackupTypeByTitle(title) {
+        return `${this.baseUrl}/backupTypes?title=${title}`;
+    }
+
+    createBackupType() {
         return `${this.baseUrl}/backupTypes`;
     }
 
-    removeStockById() {
+    removeBackupTypeById() {
         return `${this.baseUrl}/backupTypes/${id}`;
     }
 
-    updateStockById() {
+    updateBackupTypeById() {
         return `${this.baseUrl}/backupTypes/${id}`;
     }
 }

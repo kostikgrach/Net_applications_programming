@@ -15,7 +15,7 @@ export class ProductPage {
     }
 
     getData() {
-        ajax.get(backupTypeUrls.getStockById(this.id), (data) => {
+        ajax.get(backupTypeUrls.getBackupTypeById(this.id), (data) => {
             this.renderData(data);
         })
     }
