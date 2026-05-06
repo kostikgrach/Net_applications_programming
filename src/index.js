@@ -1,19 +1,46 @@
 const express = require('express');
+const CORS = require('cors')
+const helmet = require('helmet')
+const rateLimit = require('express-rate-limit')
 const path = require('path');
-const stocksRouter = require('./routes/stocks');
-const stocksService = require('./services/stocksService');
+const backupTypesRouter = require('./routes/backupTypes');
+const backupTypesService = require('./services/backupTypesService');
 
 const app = express();
 const PORT = 3000;
 
 // Определяем путь к файлу данных
-const DATA_FILE_PATH = path.join(__dirname, 'data/stocks.json');
+const DATA_FILE_PATH = path.join(__dirname, 'data/backupTypes.json');
 
 // Инициализируем сервис с путем к файлу данных
-stocksService.init(DATA_FILE_PATH);
+backupTypesService.init(DATA_FILE_PATH);
 
 // 1. Встроенный middleware для парсинга JSON
 app.use(express.json());
+
+app.use(helmet());
+
+const corsSettings = {
+    origin: (origin, callback) => {
+        if (!origin || origin.hostname == 'localhost') {
+            callback(null, true)
+        } else {
+            callback(null, false)
+        }
+    }
+}
+
+app.use(CORS(corsSettings));
+
+const limiter = rateLimit({
+    windowMs: 60000,
+    limit: 30,
+    message: 'Too many requests from this IP, please try again later.',
+    standardHeaders: 'draft-8',
+    legacyHeaders: false, 
+})
+
+app.use(limiter)
 
 // 2. Логирующий middleware
 app.use((req, res, next) => {
@@ -22,7 +49,7 @@ app.use((req, res, next) => {
 });
 
 // 3. Подключение маршрутов
-app.use('/stocks', stocksRouter);
+app.use('/backupTypes', backupTypesRouter);
 
 // 4. Глобальная обработка 404
 app.use((req, res) => {
