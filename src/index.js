@@ -22,7 +22,8 @@ app.use(helmet());
 
 const corsSettings = {
     origin: (origin, callback) => {
-        if (!origin || origin.hostname == 'localhost') {
+        if (!origin || origin.startsWith('http://localhost') || origin.startsWith('https://localhost') || 
+            origin.startsWith('http://127.0.0.1') || origin.startsWith('https://127.0.0.1')) {
             callback(null, true)
         } else {
             callback(null, false)

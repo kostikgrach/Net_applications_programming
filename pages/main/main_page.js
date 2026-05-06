@@ -3,6 +3,8 @@ import { ProductCardComponent } from "../../components/card/card.js";
 import { HeadComponent } from "../../components/head/head.js";
 import { LinkButtonComponent } from "../../components/link-button/link-button.js";
 import { DiffPage } from "../diff_page/diff_page.js";
+import {ajax} from "../../modules/ajax.js";
+import {backupTypeUrls} from "../../modules/backupTypeUrls.js";
 
 
 export class MainPage {
@@ -10,27 +12,18 @@ export class MainPage {
         this.parent = parent;
     }
     
+    
     getData() {
-        return [
-            {
-                id: 1,
-                src: "../../images/tape.png",
-                title: "Ленты",
-                text: "Созданеие бэкапа на магнитных летах"
-            },
-            {
-                id: 2,
-                src: "../../images/drive.png",
-                title: "Диски",
-                text: "Созданеие бэкапа на жестких дисках"
-            },
-            {
-                id: 3,
-                src: "../../images/cloud.png",
-                title: "Облако",
-                text: "Созданеие бэкапа на облачном хранилище"
-            },
-        ]
+        ajax.get(backupTypeUrls.getStocks(), (data) => {
+            this.renderData(data);
+        })
+    }
+
+    renderData(items) {
+        items.forEach((item) => {
+            const productCard = new ProductCardComponent(this.pageRoot)
+            productCard.render(item, this.clickCard.bind(this))
+        })
     }
 
     get pageRoot() {
@@ -73,10 +66,6 @@ export class MainPage {
         const html = this.getHTML()
         this.parent.insertAdjacentHTML('beforeend', html)
         
-        const data = this.getData()
-        data.forEach((item) => {
-            const productCard = new ProductCardComponent(this.pageRoot)
-            productCard.render(item, this.clickCard.bind(this))
-        })
+        this.getData()
     }
 }
