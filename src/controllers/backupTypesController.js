@@ -51,10 +51,15 @@ const deleteBackupType = (req, res) => {
     res.status(204).send(); // 204 No Content
 };
 
+// const options = (req, res) => {
+//     res.status(200).json({"/backupTypes": ['GET', 'POST', 'OPTIONS'], "/backupTypes/:id": ['GET', 'PATCH', 'DELETE']})
+// }
+
 module.exports = {
     getAllBackupType: getAllBackupTypes,
     getBackupTypeById: getBackupTypeById,
     createBackupType: createBackupType,
     updateBackupType: updateBackupType,
-    deleteBackupType: deleteBackupType
+    deleteBackupType: deleteBackupType, 
+//    options: options,
 };

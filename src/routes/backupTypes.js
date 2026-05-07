@@ -8,5 +8,6 @@ router.get('/:id', backupTypesController.getBackupTypeById);
 router.post('/', backupTypesController.createBackupType);
 router.patch('/:id', backupTypesController.updateBackupType);
 router.delete('/:id', backupTypesController.deleteBackupType);
+// router.options('/', backupTypesController.options);
 
 module.exports = router;

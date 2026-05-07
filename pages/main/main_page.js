@@ -16,7 +16,6 @@ export class MainPage {
     
     getData() {
         const params = new URLSearchParams(window.location.search);
-        console.log(params)
         if (params.get('title')) {
             ajax.get(backupTypeUrls.getBackupTypeByTitle(params.get('title')), (data) => {
                 this.renderData(data);
