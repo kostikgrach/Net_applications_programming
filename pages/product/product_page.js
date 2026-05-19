@@ -4,7 +4,7 @@ import { MainPage } from "../main/main_page.js";
 import { HeadComponent } from "../../components/head/head.js";
 import { LinkButtonComponent } from "../../components/link-button/link-button.js";
 import { DiffPage } from "../diff_page/diff_page.js";
-import {ajax} from "../../modules/ajax.js";
+// import {ajax} from "../../modules/ajax.js";
 import {backupTypeUrls} from "../../modules/backupTypeUrls.js";
 
 
@@ -14,10 +14,12 @@ export class ProductPage {
         this.id = id
     }
 
-    getData() {
-        ajax.get(backupTypeUrls.getBackupTypeById(this.id), (data) => {
-            this.renderData(data);
-        })
+    async getData() {
+        const response = await fetch(backupTypeUrls.getBackupTypeById(this.id));
+        this.renderData(await response.json())
+        // ajax.get(backupTypeUrls.getBackupTypeById(this.id), (data) => {
+        //     this.renderData(data);
+        // })
     }
 
     renderData(item) {

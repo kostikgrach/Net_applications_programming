@@ -3,7 +3,7 @@ import { ProductCardComponent } from "../../components/card/card.js";
 import { HeadComponent } from "../../components/head/head.js";
 import { LinkButtonComponent } from "../../components/link-button/link-button.js";
 import { DiffPage } from "../diff_page/diff_page.js";
-import {ajax} from "../../modules/ajax.js";
+// import {ajax} from "../../modules/ajax.js";
 import {backupTypeUrls} from "../../modules/backupTypeUrls.js";
 import { limiterComponent } from "../../components/limiter/limiter.js";
 
@@ -14,17 +14,21 @@ export class MainPage {
         this.limit = 0;
     }
     
-    getData() {
+    async getData() {
         const params = new URLSearchParams(window.location.search);
         console.log(params)
         if (params.get('title')) {
-            ajax.get(backupTypeUrls.getBackupTypeByTitle(params.get('title')), (data) => {
-                this.renderData(data);
-            })
+            const response = fetch(backupTypeUrls.getBackupTypeByTitle(params.get('title')));
+            this.renderData(await response.json())        
+            // ajax.get(backupTypeUrls.getBackupTypeByTitle(params.get('title')), (data) => {
+            //     this.renderData(data);
+            // })
         } else {
-            ajax.get(backupTypeUrls.getBackupTypes(), (data) => {
-                this.renderData(data);
-            })
+            const response = await fetch(backupTypeUrls.getBackupTypes());
+            this.renderData(await response.json())
+            // ajax.get(backupTypeUrls.getBackupTypes(), (data) => {
+            //     this.renderData(data);
+            // })
         }
     }
 
